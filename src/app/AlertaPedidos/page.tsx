@@ -3,7 +3,7 @@
 import { Button, Card, Grid } from "@mui/material";
 import styles from "../bandejaPedidos/bandejaPedidos.module.css"
 import { useRouter } from "next/navigation"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePedidoGetFetch } from "@/hooks/usePedidosGetFetch";
 import ContenedorTabla from "./contenedorTabla/contenedorTabla";
 export default function BandejaPedidos() {
@@ -12,6 +12,9 @@ export default function BandejaPedidos() {
     const pedidoFetch = usePedidoGetFetch()
     const [datosTabla, setDatosTabla] = useState<any[]>([])
     const [cargandoDatos, setCargandoDatos] = useState<boolean>(false);
+    useEffect(() => {
+        obtenerPedidos()
+    }, [])
     const obtenerPedidos = async () => {
         setCargandoDatos(true);
         let queryParams: any = {}
